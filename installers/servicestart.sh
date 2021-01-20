@@ -39,9 +39,9 @@ if [ $OPENVPNENABLED -eq 1 ]; then
     systemctl stop openvpn-client@client
 fi
 systemctl stop systemd-networkd
-systemctl stop hostapd.service
-systemctl stop dnsmasq.service
-systemctl stop dhcpcd.service
+service hostapd stop
+service dnsmasq stop
+service dhcpcd stop
 
 if [ "${action}" = "stop" ]; then
     echo "Services stopped. Exiting."
@@ -106,17 +106,16 @@ fi
 
 # Start services, mitigating race conditions
 echo "Starting network services..."
-systemctl start hostapd.service
+service hostapd start
 sleep "${seconds}"
 
-systemctl start dhcpcd.service
+service dhcpcd start
 sleep "${seconds}"
 
-systemctl start dnsmasq.service
+service dnsmasq start
 
 if [ $OPENVPNENABLED -eq 1 ]; then
     systemctl start openvpn-client@client
 fi
 
 echo "RaspAP service start DONE"
-

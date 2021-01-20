@@ -152,7 +152,7 @@ function _enable_php_lighttpd() {
     _install_log "Enabling PHP for lighttpd"
     sudo lighttpd-enable-mod fastcgi-php    
     sudo service lighttpd force-reload
-    sudo systemctl restart lighttpd.service || _install_status 1 "Unable to restart lighttpd"
+    sudo service lighttpd restart || _install_status 1 "Unable to restart lighttpd"
 }
 
 # Verifies existence and permissions of RaspAP directory
@@ -577,4 +577,3 @@ function _install_complete() {
         fi
     fi
 }
-

@@ -22,9 +22,9 @@ function do_bridged_mode() {
 }
 
 sudo systemctl stop systemd-networkd
-sudo systemctl stop hostapd
-sudo systemctl stop dhcpcd
-sudo systemctl stop dnsmasq
+sudo service hostapd stop
+sudo service dhcpcd stop
+sudo service dnsmasq stop
 
 if [ "$1" = "force-routed" ]
 then do_routed_mode
@@ -36,6 +36,6 @@ elif ! ip addr show br0 | grep 'inet ' > /dev/null
 then do_bridged_mode
 fi
 
-sudo systemctl start hostapd
-sudo systemctl start dhcpcd
-sudo systemctl start dnsmasq
+sudo service hostapd start
+sudo service dhcpcd start
+sudo service dnsmasq start

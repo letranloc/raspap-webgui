@@ -51,7 +51,7 @@ function DisplayHostAPDConfig()
             }
         } elseif (isset($_POST['StopHotspot'])) {
             $status->addMessage('Attempting to stop hotspot', 'info');
-            exec('sudo /bin/systemctl stop hostapd.service', $return);
+            exec('sudo /usr/sbin/service hostapd stop', $return);
             foreach ($return as $line) {
                 $status->addMessage($line, 'info');
             }
@@ -421,4 +421,3 @@ function updateHostapdConfig($ignore_broadcast_ssid,$wifiAPEnable,$bridgedEnable
     system("sudo cp /tmp/hostapddata " . RASPI_HOSTAPD_CONFIG, $result);
     return $result;
 }
-

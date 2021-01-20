@@ -37,13 +37,13 @@ function SaveTORAndVPNConfig()
         // TODO
     } elseif (isset($_POST['StartTOR'])) {
         echo "Attempting to start TOR";
-        exec('sudo systemctl start tor.service', $return);
+        exec('sudo service tor start', $return);
         foreach ($return as $line) {
             $status->addMessage($line, 'info');
         }
     } elseif (isset($_POST['StopTOR'])) {
         echo "Attempting to stop TOR";
-        exec('sudo systemctl stop tor.service', $return);
+        exec('sudo service tor stop', $return);
         foreach ($return as $line) {
             $status->addMessage($line, 'info');
         }

@@ -22,7 +22,7 @@ function DisplayDHCPConfig()
             if ($dnsmasq_state) {
                 $status->addMessage('dnsmasq already running', 'info');
             } else {
-                exec('sudo /bin/systemctl start dnsmasq.service', $dnsmasq, $return);
+                exec('sudo /usr/sbin/service dnsmasq start', $dnsmasq, $return);
                 if ($return == 0) {
                     $status->addMessage('Successfully started dnsmasq', 'success');
                     $dnsmasq_state = true;
@@ -32,7 +32,7 @@ function DisplayDHCPConfig()
             }
         } elseif (isset($_POST['stopdhcpd'])) {
             if ($dnsmasq_state) {
-                exec('sudo /bin/systemctl stop dnsmasq.service', $dnsmasq, $return);
+                exec('sudo /usr/sbin/service dnsmasq stop', $dnsmasq, $return);
                 if ($return == 0) {
                     $status->addMessage('Successfully stopped dnsmasq', 'success');
                     $dnsmasq_state = false;
@@ -257,4 +257,3 @@ function updateDHCPConfig($iface,$status)
 
     return $result;
 }
-

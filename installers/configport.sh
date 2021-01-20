@@ -32,7 +32,7 @@ done
 if [ "$restart_service" = 1 ]; then
     echo "Restarting lighttpd in 3 seconds..."
     sleep 3
-    systemctl restart lighttpd.service
+    service lighttpd restart
 fi
 if [ -n "$server_port" ]; then
     echo "Changing lighttpd server.port to $server_port ..."
@@ -51,4 +51,3 @@ fi
 if [ "$conf_change" == 1 ]; then
     echo "Restart lighttpd for new settings to take effect"
 fi
-

@@ -131,8 +131,8 @@ function _copy_rootca() {
 # Restart lighttpd service
 function _restart_lighttpd() {
     _install_log "Restarting lighttpd service"
-    sudo systemctl restart lighttpd.service || _install_error "Unable to restart lighttpd service"
-    sudo systemctl status lighttpd.service
+    sudo service restart lighttpd || _install_error "Unable to restart lighttpd service"
+    sudo service lighttpd status
 }
 
 function _install_complete() {
@@ -159,4 +159,3 @@ function _install_certificate() {
     _restart_lighttpd
     _install_complete
 }
-
